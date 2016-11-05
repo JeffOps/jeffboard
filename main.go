@@ -1,13 +1,48 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
+	"github.com/ConnectedVentures/gonfigurator"
 	"github.com/gorilla/mux"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
+type PostgreSQLConfig struct {
+	User     string
+	Host     string
+	Password string
+	Database string
+	Port     uint
+}
+
+type Config struct {
+	PostgreSQL PostgreSQLConfig
+}
+
+var (
+	config Config
+	db     *sqlx.DB
+)
+
+func initDb(pgConfig PostgreSQLConfig) {
+	if pgConfig.Port == 0 {
+		pgConfig.Port = 5432
+	}
+	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s port=%d", pgConfig.User, pgConfig.Password, pgConfig.Database, pgConfig.Host, pgConfig.Port)
+	var err error
+	db, err = sqlx.Connect("postgres", connStr)
+	if err != nil {
+		log.Fatalf("Cannot connect to database: %s", err.Error())
+	}
+}
+
 func main() {
+	gonfigurator.Parse("config.yml", &config)
+	initDb(config.PostgreSQL)
 	router := mux.NewRouter()
 	router.HandleFunc("/", handleHome).Methods("GET")
 	router.HandleFunc("/thread", handleNewThread).Methods("GET")

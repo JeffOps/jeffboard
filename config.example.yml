@@ -1,0 +1,7 @@
+---
+PostgreSQL:
+  User: jeffboard
+  Host: 127.0.0.1
+  Database: jeffboard
+  Password: jeffboardpass
+  

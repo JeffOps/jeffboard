@@ -1,10 +1,24 @@
-hash: 34345e4560e96c68b79741ec98d66e30718d56dc853d48feb6ab98dbff02b8f1
-updated: 2016-11-05T01:04:51.266021054Z
+hash: eea62aa5dfd84e87099f720950b565299e9a15a652de9a60da081226b7adc2e3
+updated: 2016-11-05T13:44:12.064578541Z
 imports:
 - name: github.com/aymerick/raymond
   version: a2232af10b53ef1ae5a767f5178db3a6c1dab655
+  subpackages:
+  - ast
+  - parser
+  - lexer
+- name: github.com/ConnectedVentures/gonfigurator
+  version: a5f345764ddf301942bbcf4ee90a098fb8decbc9
+- name: github.com/ghodss/yaml
+  version: bea76d6a4713e18b7f5321a2b020738552def3ea
 - name: github.com/gorilla/context
   version: 1ea25387ff6f684839d82767c1733ff4d4d15d0a
 - name: github.com/gorilla/mux
   version: 0eeaf8392f5b04950925b8a69fe70f110fa7cbfc
+- name: github.com/jinzhu/configor
+  version: fb7a3183cd987802d006408fe3a4a9e1f6002ece
+- name: github.com/lib/pq
+  version: d8eeeb8bae8896dd8e1b7e514ab0d396c4f12a1b
+- name: gopkg.in/yaml.v2
+  version: a5b47d31c556af34a302ce5d659e6fea44d90de0
 testImports: []
