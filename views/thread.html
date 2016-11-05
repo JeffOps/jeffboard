@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Basic Template</title>
+    <title>Thread ID:{{id}}</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,6 @@
   </head>
   <body>
     <div class="main-container">
-      {{#each threads}}
       <div class="home-thread">
       {{#each posts}}
         <div class="row post">
@@ -24,8 +23,6 @@
             {{text}}
           </div>
         </div>
-      {{/each}}
-      </div>
       {{/each}}
     </div>
     <!-- Kube JS + jQuery are used for some functionality, but are not required for the basic setup -->
