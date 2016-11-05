@@ -1,0 +1,24 @@
+{{> header}}
+      <form method="post" action="/thread" class="form">
+        <div class="form-item">
+          <label>Name</label>
+          <input type="text" name="name" />
+        </div>
+        <div class="form-item">
+          <label>Subject</label>
+          <input type="text" name="subject" />
+        </div>
+        <div class="form-item">
+          <label>File</label>
+          <input type="file" name="file" />
+        </div>
+        <div class="form-item">
+          <label>Text</label>
+          <textarea rows="6"></textarea>
+        </div>
+
+        <div class="form-item">
+          <button class="button primary" type="submit">Post new thread</button>
+        </div>
+      </form>
+{{> footer}}

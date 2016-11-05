@@ -16,6 +16,7 @@ var (
 
 func init() {
 	threadTemplate, _ = raymond.ParseFile("views/thread.html")
+	registerLayout(threadTemplate)
 }
 
 func handleThread(w http.ResponseWriter, r *http.Request) {
@@ -31,7 +32,8 @@ func handleThread(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	v := threadTemplate.MustExec(map[string]interface{}{
-		"id":    posts[0].ThreadID,
+		"title": fmt.Sprintf("jeffboard - thread %d", posts[0].ThreadID),
+		"page":  "thread",
 		"posts": posts,
 	})
 	fmt.Fprintf(w, v)

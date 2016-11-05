@@ -15,6 +15,7 @@ var (
 
 func init() {
 	homeTemplate, _ = raymond.ParseFile("views/index.html")
+	registerLayout(homeTemplate)
 }
 
 type Post struct {
@@ -35,11 +36,6 @@ type Thread struct {
 	Posts []Post
 }
 
-type Homepage struct {
-	Title   string
-	Threads []Thread
-}
-
 func handleHome(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Queryx(`
 	SELECT f.* FROM (
@@ -58,9 +54,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	homepage := Homepage{
-		Title: "Frontpage",
-	}
+	var threads []Thread
 	var currentThread *Thread
 	for rows.Next() {
 		var post Post
@@ -72,7 +66,7 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		}
 
 		if currentThread != nil && currentThread.ID != post.ThreadID {
-			homepage.Threads = append(homepage.Threads, *currentThread)
+			threads = append(threads, *currentThread)
 			currentThread = nil
 		}
 		if currentThread == nil {
@@ -80,8 +74,13 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		}
 		currentThread.Posts = append(currentThread.Posts, post)
 	}
-	homepage.Threads = append(homepage.Threads, *currentThread)
+	threads = append(threads, *currentThread)
 
-	v := homeTemplate.MustExec(homepage)
+	page := map[string]interface{}{
+		"page":    "frontpage",
+		"threads": threads,
+		"title":   "jeffboard",
+	}
+	v := homeTemplate.MustExec(page)
 	fmt.Fprintf(w, v)
 }

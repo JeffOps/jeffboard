@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/ConnectedVentures/gonfigurator"
+	"github.com/aymerick/raymond"
 	"github.com/gorilla/mux"
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
@@ -28,6 +29,10 @@ var (
 	db     *sqlx.DB
 )
 
+func registerLayout(tpl *raymond.Template) {
+	tpl.RegisterPartialFiles("views/header.html", "views/footer.html")
+}
+
 func initDb(pgConfig PostgreSQLConfig) {
 	if pgConfig.Port == 0 {
 		pgConfig.Port = 5432
@@ -40,10 +45,19 @@ func initDb(pgConfig PostgreSQLConfig) {
 	}
 }
 
+var (
+	headerTemplate, footerTemplate *raymond.Template
+)
+
+func init() {
+	headerTemplate, _ = raymond.ParseFile("views/header.html")
+	footerTemplate, _ = raymond.ParseFile("views/header.html")
+}
+
 func main() {
 	gonfigurator.Parse("config.yml", &config)
 	initDb(config.PostgreSQL)
-	router := mux.NewRouter()
+	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", handleHome).Methods("GET")
 	router.HandleFunc("/thread", handleNewThread).Methods("GET")
 	router.HandleFunc("/thread", handleNewThreadPost).Methods("POST")
