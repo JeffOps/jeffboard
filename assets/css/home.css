@@ -1,0 +1,15 @@
+.main-container {
+  width: 900px;
+}
+.home-thread {
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
+.post {
+  margin-bottom: 10px;
+  background: #E4F1FB;
+}
+
+.post:first-child {
+  background: #CDE4F5;
+}

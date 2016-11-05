@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Basic Template</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Kube CSS -->
+    <link rel="stylesheet" href="assets/css/kube.css">
+
+    <link rel="stylesheet" href="assets/css/home.css">
+  </head>
+  <body>
+    <div class="main-container">
+      {{#each threads}}
+      <div class="home-thread">
+      {{#each posts}}
+        <div class="row post">
+          <div class="col col-4">
+            <img src="{{attachment}}" />
+          </div>
+          <div class="col col-8">
+            {{text}}
+          </div>
+        </div>
+      {{/each}}
+      </div>
+      {{/each}}
+    </div>
+    <!-- Kube JS + jQuery are used for some functionality, but are not required for the basic setup -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="assets/js/kube.js"></script>
+  </body>
+</html>
