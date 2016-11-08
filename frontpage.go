@@ -39,7 +39,7 @@ type Thread struct {
 func handleHome(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Queryx(`
 	SELECT f.* FROM (
-		SELECT subject, text, thread_id, date_posted,
+		SELECT id, subject, text, thread_id, date_posted,
 		rank() OVER (PARTITION BY thread_id ORDER BY date_posted DESC) AS drank, -- last post in thread has drank = 1
 		rank() OVER (PARTITION BY thread_id ORDER BY date_posted ASC) AS arank,  -- first post in thread has arank = 1
 		max(date_posted) OVER (PARTITION BY thread_id) AS last_post_in_thread FROM post

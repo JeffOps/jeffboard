@@ -1,13 +1,14 @@
-{{> header}}
-      <div class="home-thread">
       {{#each posts}}
-        <div class="row post">
+        <div class="row post" id="p{{ID}}">
           <div class="col col-4">
             <img src="http://placekitten.com/200/200" />
           </div>
           <div class="col col-8">
+            <div class="post-author">
+              <span class="post-name">Anonymous</span> - <span class="post-date">{{formatDate date}}</span>
+              No.<a href="/thread/{{threadID}}#p{{ID}}">{{ID}}</a>
+            </div>
             {{text}}
           </div>
         </div>
       {{/each}}
-{{> footer}}

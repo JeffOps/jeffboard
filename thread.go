@@ -15,7 +15,7 @@ var (
 )
 
 func init() {
-	threadTemplate, _ = raymond.ParseFile("views/thread.html")
+	threadTemplate, _ = raymond.ParseFile("views/thread-view.html")
 	registerLayout(threadTemplate)
 }
 

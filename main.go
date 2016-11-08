@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/ConnectedVentures/gonfigurator"
 	"github.com/aymerick/raymond"
@@ -30,7 +31,7 @@ var (
 )
 
 func registerLayout(tpl *raymond.Template) {
-	tpl.RegisterPartialFiles("views/header.html", "views/footer.html")
+	tpl.RegisterPartialFiles("views/header.html", "views/footer.html", "views/thread.html")
 }
 
 func initDb(pgConfig PostgreSQLConfig) {
@@ -52,6 +53,9 @@ var (
 func init() {
 	headerTemplate, _ = raymond.ParseFile("views/header.html")
 	footerTemplate, _ = raymond.ParseFile("views/header.html")
+	raymond.RegisterHelper("formatDate", func(date time.Time) string {
+		return date.Format("2006/01/02(Mon)15:04:05")
+	})
 }
 
 func main() {
@@ -68,5 +72,6 @@ func main() {
 
 	s := http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets/")))
 	router.PathPrefix("/assets/").Handler(s)
+	log.Println("Starting jeffboard")
 	log.Fatal(http.ListenAndServe(":8900", router))
 }

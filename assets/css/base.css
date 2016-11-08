@@ -3,6 +3,19 @@
   margin: auto;
 }
 
+.thread {
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+}
+.post {
+  margin-bottom: 10px;
+  background: #E4F1FB;
+}
+
+.post:first-child {
+  background: #CDE4F5;
+}
+
 #navbar-demo {
   display: -ms-flexbox;
   display: -webkit-flex;

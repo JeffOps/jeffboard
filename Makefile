@@ -1,3 +1,11 @@
+all: build
+
+build:
+	go build
+
+run: build
+	./jeffboard
+
 deps:
 	wget https://github.com/imperavi/kube/archive/v6.0.1.zip -O kube.zip
 	unzip -o kube.zip
